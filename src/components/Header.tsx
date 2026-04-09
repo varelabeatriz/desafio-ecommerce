@@ -17,11 +17,11 @@ function Header() {
         }
 
     return (
-      <header className="w-full bg-gray-100 shadow-sm">
+      <header className="w-full bg-blue-500 shadow-sm">
         <div className="max-w-7xl mx-auto flex items-center justify-between p-4">
           
-          <div className="text-2xl font-bold text-blue-950 font-playfair">
-            WebMarket
+          <div className="text-2xl font-bold text-white font-playwrite-ie"> 
+            E-Commerce
           </div>
 
           <div className="flex-1 mx-6">

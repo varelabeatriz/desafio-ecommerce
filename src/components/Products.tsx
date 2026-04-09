@@ -63,7 +63,7 @@ function Products(){
     }, [selectedProduct]);
 
     return (
-        <div className="container mx-auto p-4">
+        <div className="container mx-auto p-4 bg-gray-100">
   {products.length > 0 ? (
     <>
     <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
@@ -80,7 +80,7 @@ function Products(){
         />
       
         <div className="flex-1">
-          <h2 className="text-lg font-semibold text-gray-800 mb-1 line-clamp-2 font-playfair">
+          <h2 className="text-lg font-semibold text-gray-800 mb-1 line-clamp-2 font-google-sans-flex">
             {product.title}
           </h2>
 
@@ -181,13 +181,13 @@ function Products(){
           </div>
 
           <div>
-            <h2 className="text-3xl font-bold text-gray-900 font-playfair mb-2">{selectedProduct.title}</h2>
+            <h2 className="text-3xl font-bold text-gray-900 font-google-sans-flex mb-2">{selectedProduct.title}</h2>
             <p className="text-gray-600 mb-4">{selectedProduct.description}</p>
 
             <div className="space-y-2 mb-6">
-              <p className="text-2xl font-bold text-green-700">{selectedProduct.price}</p>
+              <p className="text-2xl font-bold text-green-700">R${selectedProduct.price}</p>
               <p className="text-red-600 font-semibold">
-                Desconto: {selectedProduct.discountPercentage.toFixed(2)}%
+                {Math.round(selectedProduct.discountPercentage)}% OFF
               </p>
               <p className="text-gray-700">Marca: {selectedProduct.brand || "N/A"}</p>
               <p className="text-gray-700 capitalize">Categoria: {selectedProduct.category}</p>
@@ -196,7 +196,7 @@ function Products(){
             </div>
 
             <div className="mb-6">
-              <h3 className="text-xl font-semibold font-playfair mb-2">Reviews</h3>
+              <h3 className="text-xl font-semibold font-google-sans-flex mb-2">Reviews</h3>
               {selectedProduct.reviews?.length ? (
                 <div className="space-y-3">
                   {selectedProduct.reviews.map((review, index) => (
@@ -216,7 +216,7 @@ function Products(){
             </div>
 
             <div>
-              <h3 className="text-xl font-semibold font-playfair mb-2">Informacoes Adicionais</h3>
+              <h3 className="text-xl font-semibold font-google-sans-flex mb-2">Informacoes Adicionais</h3>
               <div className="space-y-1 text-sm text-gray-700">
                 <p>SKU: {selectedProduct.sku || "N/A"}</p>
                 <p>Peso: {selectedProduct.weight ? `${selectedProduct.weight} kg` : "N/A"}</p>
