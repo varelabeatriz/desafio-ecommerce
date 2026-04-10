@@ -1,3 +1,4 @@
+import type { ReactElement } from "react";
 import type { PaginationProps } from "../types/pagination";
 
 function Pagination({
@@ -10,7 +11,7 @@ function Pagination({
   hasPrevPage,
   onNextPage,
   onPrevPage,
-}: PaginationProps) {
+}: PaginationProps): ReactElement {
   return (
     <div className="mt-8 flex flex-col md:flex-row items-center justify-between gap-4">
       <p className="text-sm text-gray-600">

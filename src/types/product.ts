@@ -38,3 +38,10 @@ export type Category = {
   name: string;
   url: string;
 };
+
+export type ProductsResponse = {
+  products: Product[];
+  total: number;
+  skip: number;
+  limit: number;
+};

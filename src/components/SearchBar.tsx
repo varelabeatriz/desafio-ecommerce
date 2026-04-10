@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import type { ChangeEvent } from "react";
+import type { ChangeEvent, ReactElement } from "react";
 import { useProductsContext } from "../contexts/ProductsContext";
 
-function SearchBar(){
+function SearchBar(): ReactElement {
     const [query, setQuery] = useState("");
     const { getData } = useProductsContext();
 

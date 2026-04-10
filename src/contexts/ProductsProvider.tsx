@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ProductsContext } from "./ProductsContext";
 import axios from "axios";
 import type { ChildrenProps } from "../types/common";
-import type { Category, Product } from "../types/product";
+import type { Category, Product, ProductsResponse } from "../types/product";
 
 const PRODUCTS_LIMIT = 12;
 
@@ -27,7 +27,7 @@ function ProductsProvider({ children }: ChildrenProps) {
     query?: string;
     category?: string | null;
     nextSkip?: number;
-  } = {}) => {
+  } = {}): Promise<void> => {
     const normalizedQuery = query.trim();
     const params: Record<string, string | number> = {
       limit: PRODUCTS_LIMIT,
@@ -43,30 +43,35 @@ function ProductsProvider({ children }: ChildrenProps) {
       endpoint = `https://dummyjson.com/products/category/${category}`;
     }
 
-    const { data } = await axios.get(endpoint, { params });
+    const { data } = await axios.get<ProductsResponse>(endpoint, { params });
 
     setProducts(data.products ?? []);
     setTotal(data.total ?? 0);
     setSkip(data.skip ?? nextSkip);
   };
 
-  const getData = async (query = "") => {
+  const getData = async (query = ""): Promise<void> => {
     setCurrentQuery(query);
     setCurrentCategory(null);
     await fetchProducts({ query, category: null, nextSkip: 0 });
   };
 
-  const getProductsByCategory = async (category: string) => {
+  const getProductsByCategory = async (category: string): Promise<void> => {
     try {
       setCurrentCategory(category);
       setCurrentQuery("");
       await fetchProducts({ query: "", category, nextSkip: 0 });
-    } catch (error) {
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error("Erro ao buscar produtos por categoria", error.message);
+        return;
+      }
+
       console.error("Erro ao buscar produtos por categoria", error);
     }
   };
 
-  const nextPage = async () => {
+  const nextPage = async (): Promise<void> => {
     if (!hasNextPage) return;
 
     await fetchProducts({
@@ -76,7 +81,7 @@ function ProductsProvider({ children }: ChildrenProps) {
     });
   };
 
-  const prevPage = async () => {
+  const prevPage = async (): Promise<void> => {
     if (!hasPrevPage) return;
 
     await fetchProducts({
@@ -86,8 +91,8 @@ function ProductsProvider({ children }: ChildrenProps) {
     });
   };
 
-  const getCategories = async () => {
-    const { data } = await axios.get("https://dummyjson.com/products/categories");
+  const getCategories = async (): Promise<void> => {
+    const { data } = await axios.get<Category[]>("https://dummyjson.com/products/categories");
     setCategories(data);
   };
 

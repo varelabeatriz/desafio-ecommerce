@@ -1,9 +1,10 @@
 
+import type { ReactElement } from "react";
 import Header from './components/Header'
 import Products from './components/Products'
 import ProductsProvider from './contexts/ProductsProvider'
 
-function App() {
+function App(): ReactElement {
 
   return (
     <ProductsProvider>

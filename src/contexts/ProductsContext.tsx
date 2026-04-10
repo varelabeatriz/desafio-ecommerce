@@ -3,7 +3,7 @@ import type { ProductsContextValue } from "../types/products-context";
 
 export const ProductsContext = createContext<ProductsContextValue | null>(null);
 
-export function useProductsContext() {
+export function useProductsContext(): ProductsContextValue {
   const context = useContext(ProductsContext);
 
   if (!context) {

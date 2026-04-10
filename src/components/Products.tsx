@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
+import type { ReactElement } from "react";
 import { useProductsContext } from "../contexts/ProductsContext";
 import type { Product } from "../types/product";
 import Pagination from "./Pagination";
 
-function Products(){
+function Products(): ReactElement {
     const {
       products,
       currentPage,
@@ -98,7 +99,7 @@ function Products(){
         </div>
       
         <button
-          className="mt-auto w-full bg-blue-900 cursor-pointer text-white py-2 rounded-lg hover:bg-gray-800 transition"
+          className="mt-auto w-full bg-blue-900 cursor-pointer text-white py-2 rounded-lg hover:bg-blue-800 transition"
           onClick={(event) => event.stopPropagation()}
         >
           Comprar
@@ -127,7 +128,7 @@ function Products(){
       onClick={closeProductModal}
     >
       <div
-        className="relative bg-white w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-2xl p-6"
+        className="relative w-full max-w-5xl max-h-[90vh] overflow-hidden rounded-2xl bg-white"
         onClick={(event) => event.stopPropagation()}
       >
         <button
@@ -137,7 +138,8 @@ function Products(){
           &times;
         </button>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="max-h-[90vh] overflow-y-auto p-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div>
             <div className="relative">
               <img
@@ -200,9 +202,12 @@ function Products(){
               {selectedProduct.reviews?.length ? (
                 <div className="space-y-3">
                   {selectedProduct.reviews.map((review, index) => (
-                    <div key={`${review.reviewerEmail}-${index}`} className="border rounded-lg p-3">
+                    <div
+                      key={`${review.reviewerEmail}-${index}`}
+                      className="rounded-lg border border-blue-300 bg-blue-50 p-3"
+                    >
                       <p className="font-semibold">{review.reviewerName}</p>
-                      <p className="text-sm text-gray-600">Nota: {review.rating}/5</p>
+                      <p className="text-sm font-bold text-blue-800">Nota: {review.rating}/5</p>
                       <p className="text-sm text-gray-700">{review.comment}</p>
                       <p className="text-xs text-gray-500 mt-1">
                         {new Date(review.date).toLocaleDateString("pt-BR")}
@@ -216,7 +221,7 @@ function Products(){
             </div>
 
             <div>
-              <h3 className="text-xl font-semibold font-google-sans-flex mb-2">Informacoes Adicionais</h3>
+              <h3 className="text-xl font-semibold font-google-sans-flex mb-2">Informações Adicionais</h3>
               <div className="space-y-1 text-sm text-gray-700">
                 <p>SKU: {selectedProduct.sku || "N/A"}</p>
                 <p>Peso: {selectedProduct.weight ? `${selectedProduct.weight} kg` : "N/A"}</p>
@@ -234,6 +239,7 @@ function Products(){
               </div>
             </div>
           </div>
+        </div>
         </div>
       </div>
     </div>
