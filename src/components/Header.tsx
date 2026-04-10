@@ -5,7 +5,7 @@ import type { ReactElement } from "react";
 import type { Category } from "../types/product";
 
 function Header(): ReactElement {
-  const { categories, getCategories, getProductsByCategory } = useProductsContext();
+  const { categories, getCategories, getProductsByCategory, getData } = useProductsContext();
   const primaryCategories = categories.slice(0, 7);
   const otherCategories = categories.slice(7);
 
@@ -21,9 +21,13 @@ function Header(): ReactElement {
       <header className="w-full bg-blue-500 shadow-sm">
         <div className="max-w-7xl mx-auto flex items-center justify-between p-4">
           
-          <div className="text-2xl font-bold text-white font-playwrite-ie"> 
+          <button
+            type="button"
+            className="cursor-pointer text-2xl font-bold text-white font-playwrite-ie"
+            onClick={() => getData("")}
+          >
             E-Commerce
-          </div>
+          </button>
 
           <div className="mx-6 flex flex-1 items-center gap-4">
             <div className="flex-1">
